@@ -1,24 +1,20 @@
-PRAGMA foreign_keys = ON;
+--first enter the department names without head_doctor_id
 
---------------------------------------------------
--- PATIENTS
---------------------------------------------------
-INSERT INTO Patients (patient_name,email,phone_number,date_of_birth,gender,address) VALUES
-('Rahul Sharma','rahul1@gmail.com','9000000001','1995-06-12','Male','Mumbai'),
-('Priya Mehta','priya2@gmail.com','9000000002','1998-02-10','Female','Pune'),
-('Amit Verma','amit3@gmail.com','9000000003','1992-11-01','Male','Delhi'),
-('Sneha Patil','sneha4@gmail.com','9000000004','1990-07-18','Female','Mumbai'),
-('Karan Singh','karan5@gmail.com','9000000005','1988-05-30','Male','Delhi'),
-('Neha Gupta','neha6@gmail.com','9000000006','1997-03-22','Female','Jaipur'),
-('Arjun Nair','arjun7@gmail.com','9000000007','1994-09-11','Male','Kochi'),
-('Pooja Shah','pooja8@gmail.com','9000000008','1996-01-14','Female','Ahmedabad'),
-('Rohan Das','rohan9@gmail.com','9000000009','1993-10-03','Male','Kolkata'),
-('Anita Kulkarni','anita10@gmail.com','9000000010','1989-12-25','Female','Pune');
+INSERT INTO Departments (department_name)
+VALUES
+('Cardiology'),
+('Neurology'),
+('General Medicine'),
+('Dermatology'),
+('Orthopedics'),
+('Pediatrics'),
+('ENT'),
+('Gynecology'),
+('Psychiatry');
 
---------------------------------------------------
--- DOCTORS
---------------------------------------------------
-INSERT INTO Doctors 
+--then enter the doctors with the department id
+
+INSERT INTO Doctors
 (doctor_name,email,phone_number,date_of_birth,gender,address,specialization,fees,department_id)
 VALUES
 ('Dr. Anil Kapoor','anil@hospital.com','9100000001','1975-04-10','Male','Mumbai','Cardiologist',1000,1),
@@ -32,9 +28,32 @@ VALUES
 ('Dr. Arvind Menon','arvind@hospital.com','9100000009','1974-03-19','Male','Kochi','Cardiologist',1300,1),
 ('Dr. Sunita Desai','sunita@hospital.com','9100000010','1981-12-01','Female','Mumbai','Psychiatrist',1150,9);
 
---------------------------------------------------
--- MEDICINES
---------------------------------------------------
+--then update the department table with the head_doctor_id
+
+UPDATE Departments SET head_doctor_id = 1 WHERE department_id = 1;
+UPDATE Departments SET head_doctor_id = 2 WHERE department_id = 2;
+UPDATE Departments SET head_doctor_id = 3 WHERE department_id = 3;
+UPDATE Departments SET head_doctor_id = 4 WHERE department_id = 4;
+UPDATE Departments SET head_doctor_id = 5 WHERE department_id = 5;
+UPDATE Departments SET head_doctor_id = 6 WHERE department_id = 6;
+UPDATE Departments SET head_doctor_id = 7 WHERE department_id = 7;
+UPDATE Departments SET head_doctor_id = 8 WHERE department_id = 8;
+UPDATE Departments SET head_doctor_id = 10 WHERE department_id = 9;
+
+--and then perform all the operations in one go no dependency issues
+
+INSERT INTO Patients (patient_name,email,phone_number,date_of_birth,gender,address) VALUES
+('Rahul Sharma','rahul1@gmail.com','9000000001','1995-06-12','Male','Mumbai'),
+('Priya Mehta','priya2@gmail.com','9000000002','1998-02-10','Female','Pune'),
+('Amit Verma','amit3@gmail.com','9000000003','1992-11-01','Male','Delhi'),
+('Sneha Patil','sneha4@gmail.com','9000000004','1990-07-18','Female','Mumbai'),
+('Karan Singh','karan5@gmail.com','9000000005','1988-05-30','Male','Delhi'),
+('Neha Gupta','neha6@gmail.com','9000000006','1997-03-22','Female','Jaipur'),
+('Arjun Nair','arjun7@gmail.com','9000000007','1994-09-11','Male','Kochi'),
+('Pooja Shah','pooja8@gmail.com','9000000008','1996-01-14','Female','Ahmedabad'),
+('Rohan Das','rohan9@gmail.com','9000000009','1993-10-03','Male','Kolkata'),
+('Anita Kulkarni','anita10@gmail.com','9000000010','1989-12-25','Female','Pune');
+
 INSERT INTO Medicines (medicine_name,description,price,stock,expiry_date) VALUES
 ('Paracetamol','Fever and pain relief',20,500,'2027-01-01'),
 ('Amoxicillin','Antibiotic',50,300,'2026-08-01'),
@@ -47,9 +66,6 @@ INSERT INTO Medicines (medicine_name,description,price,stock,expiry_date) VALUES
 ('Pantoprazole','Acidity medicine',35,400,'2027-04-01'),
 ('Vitamin D','Supplement',45,500,'2027-12-01');
 
---------------------------------------------------
--- INSURANCE
---------------------------------------------------
 INSERT INTO Insurance (provider_name,coverage_percent,max_coverage_amount,co_pay_percent) VALUES
 ('Star Health',80,50000,20),
 ('HDFC Ergo',90,100000,10),
@@ -62,9 +78,6 @@ INSERT INTO Insurance (provider_name,coverage_percent,max_coverage_amount,co_pay
 ('Future Generali',80,70000,20),
 ('Tata AIG',92,120000,8);
 
---------------------------------------------------
--- DEPARTMENTS
---------------------------------------------------
 INSERT INTO Departments (department_name,head_doctor_id) VALUES
 ('Cardiology',1),
 ('Neurology',2),
@@ -77,9 +90,6 @@ INSERT INTO Departments (department_name,head_doctor_id) VALUES
 ('Cardiology-2',9),
 ('Psychiatry',10);
 
---------------------------------------------------
--- TIME TABLE
---------------------------------------------------
 INSERT INTO Time_Table (day_of_week,time_start,time_end,doctor_id) VALUES
 ('Monday','09:00','12:00',1),
 ('Tuesday','10:00','13:00',2),
@@ -92,9 +102,6 @@ INSERT INTO Time_Table (day_of_week,time_start,time_end,doctor_id) VALUES
 ('Wednesday','10:00','13:00',9),
 ('Thursday','11:00','15:00',10);
 
---------------------------------------------------
--- APPOINTMENTS
---------------------------------------------------
 INSERT INTO Appointments (appointment_date,status,patient_id,doctor_id,time_table_id) VALUES
 ('2026-03-10','Confirmed',1,1,1),
 ('2026-03-11','Pending',2,2,2),
@@ -107,9 +114,6 @@ INSERT INTO Appointments (appointment_date,status,patient_id,doctor_id,time_tabl
 ('2026-03-18','Confirmed',9,9,9),
 ('2026-03-19','Pending',10,10,10);
 
---------------------------------------------------
--- DIAGNOSIS
-------------------------------------------------
 INSERT INTO Diagnosis (diagnosis_description,doctor_id,patient_id) VALUES
 ('High fever',3,1),
 ('Migraine',2,2),
@@ -122,9 +126,6 @@ INSERT INTO Diagnosis (diagnosis_description,doctor_id,patient_id) VALUES
 ('Heart checkup',9,9),
 ('Depression symptoms',10,10);
 
---------------------------------------------------
--- PATIENTS INSURANCE
---------------------------------------------------
 INSERT INTO Patients_Insurance (policy_number,start_date,end_date,insurance_id,patient_id) VALUES
 ('POL001','2025-01-01','2027-01-01',1,1),
 ('POL002','2024-01-01','2026-01-01',2,2),
@@ -137,9 +138,6 @@ INSERT INTO Patients_Insurance (policy_number,start_date,end_date,insurance_id,p
 ('POL009','2025-08-01','2027-08-01',9,9),
 ('POL010','2025-09-01','2027-09-01',10,10);
 
---------------------------------------------------
--- TESTS
---------------------------------------------------
 INSERT INTO Tests (test_name,description,price) VALUES
 ('Blood Test','General blood analysis',500),
 ('MRI Scan','Brain MRI scan',5000),
@@ -152,9 +150,6 @@ INSERT INTO Tests (test_name,description,price) VALUES
 ('Kidney Test','Kidney function',850),
 ('Allergy Test','Allergy detection',1000);
 
---------------------------------------------------
--- PRESCRIPTIONS
---------------------------------------------------
 INSERT INTO Prescriptions (prescription_description,patient_id,doctor_id,appointment_id) VALUES
 ('Fever treatment',1,3,1),
 ('Migraine medication',2,2,2),
@@ -167,9 +162,6 @@ INSERT INTO Prescriptions (prescription_description,patient_id,doctor_id,appoint
 ('Heart medicine',9,9,9),
 ('Mental health medication',10,10,10);
 
---------------------------------------------------
--- PRESCRIBED MEDICINES
---------------------------------------------------
 INSERT INTO prescribed_medicines (dosage,quantity,prescription_id,medicine_id) VALUES
 ('1 tablet twice daily',5,1,1),
 ('1 capsule daily',7,2,2),
@@ -182,9 +174,6 @@ INSERT INTO prescribed_medicines (dosage,quantity,prescription_id,medicine_id) V
 ('1 tablet after meal',7,9,9),
 ('1 tablet daily',10,10,10);
 
---------------------------------------------------
--- PRESCRIBED TESTS
---------------------------------------------------
 INSERT INTO Prescribed_Tests (test_date,prescription_id,test_id) VALUES
 ('2026-03-10',1,1),
 ('2026-03-11',2,2),
@@ -197,9 +186,6 @@ INSERT INTO Prescribed_Tests (test_date,prescription_id,test_id) VALUES
 ('2026-03-18',9,9),
 ('2026-03-19',10,10);
 
---------------------------------------------------
--- BILLS
---------------------------------------------------
 INSERT INTO Bills (amount,gst_percent,gst_amount,total_amount,status,appointment_id) VALUES
 (1000,18,180,1180,'Pending',1),
 (2000,18,360,2360,'Paid',2),
@@ -212,9 +198,6 @@ INSERT INTO Bills (amount,gst_percent,gst_amount,total_amount,status,appointment
 (4000,18,720,4720,'Paid',9),
 (2200,18,396,2596,'Pending',10);
 
---------------------------------------------------
--- PAYMENTS
---------------------------------------------------
 INSERT INTO Payments (amount_paid,payment_method,bill_id) VALUES
 (1180,'CreditCard',1),
 (2360,'Cash',2),

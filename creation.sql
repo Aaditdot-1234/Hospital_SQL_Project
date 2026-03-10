@@ -40,7 +40,9 @@ CREATE TABLE Medicines(
 CREATE TABLE Insurance(
     insurance_id INTEGER PRIMARY KEY AUTOINCREMENT,
     provider_name TEXT NOT NULL UNIQUE,
-    coverage_details TEXT NOT NULL,
+    coverage_percent DECIMAL(5,2) NOT NULL CHECK(coverage_percent BETWEEN 0 AND 100),
+    max_coverage_amount DECIMAL(10,2) NOT NULL,
+    co_pay_percent DECIMAL(5,2) DEFAULT 0 CHECK(co_pay_percent BETWEEN 0 AND 100),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -109,6 +111,9 @@ CREATE TABLE Patients_Insurance(
 CREATE TABLE Bills(
     bill_id INTEGER PRIMARY KEY AUTOINCREMENT,
     amount DECIMAL(10,2) NOT NULL,
+    gst_percent DECIMAL(5,2) NOT NULL DEFAULT 18,
+    gst_amount DECIMAL(10,2) NOT NULL,
+    total_amount DECIMAL(10,2) NOT NULL,
     status TEXT CHECK(
         status IN ('Pending','Paid','PartiallyPaid','Cancelled')
     ),
@@ -151,3 +156,23 @@ CREATE TABLE prescribed_medicines(
     FOREIGN KEY (prescription_id) REFERENCES Prescriptions(prescription_id),
     FOREIGN KEY (medicine_id) REFERENCES Medicines(medicine_id)
 );
+
+CREATE TABLE Prescribed_Tests(
+    test_date DATE NOT NULL,
+    prescription_id INTEGER NOT NULL,
+    test_id INTEGER NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (prescription_id, test_id),
+    FOREIGN KEY (prescription_id) REFERENCES Prescriptions(prescription_id),
+    FOREIGN KEY (test_id) REFERENCES Tests(test_id)
+);
+
+CREATE TABLE Tests(
+    test_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    test_name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)
