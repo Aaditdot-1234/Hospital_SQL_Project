@@ -1,4 +1,3 @@
--- Patients
 CREATE TABLE Patients(
     patient_id INT IDENTITY(1,1) PRIMARY KEY,
     patient_name NVARCHAR(100) NOT NULL,

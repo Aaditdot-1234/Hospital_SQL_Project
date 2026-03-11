@@ -15,3 +15,10 @@ begin
     join Departments dept on d.department_id = dept.department_id
     where a.created_at >= @start_date and a.created_at < @end_date
 end
+
+create procedure sp-patient-billing-system
+    @PatientId int
+as
+BEGIN
+    select * from students
+END

@@ -1,0 +1,5 @@
+1) Add a test result attribute in prescribed_Tests Table and create the 3rd trigger.
+
+2) Make the changes in the 2nd trigger of creating a bill after updation in appointment table. (the commmented code in triggers.sql is the one that you need to check).
+
+3) Change the input as well for adding values to prescribed_Tests ok

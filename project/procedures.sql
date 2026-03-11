@@ -13,7 +13,7 @@ BEGIN
         dept.department_name,
         COUNT(a.appointment_id) AS total_appointments,
         COUNT(DISTINCT a.patient_id) AS unique_patients,
-        ISNULL(SUM(d.fees),0) AS consultation_revenue
+        ISNULL(SUM(CASE WHEN a.appointment_id IS NOT NULL THEN d.fees ELSE 0 END),0) AS consultation_revenue
     FROM Departments dept
     LEFT JOIN Doctors d 
         ON dept.department_id = d.department_id
